@@ -60,3 +60,7 @@ Ensure billing is enabled for Speech-to-Text enhanced models.
 Use a clear, loud voice for recordings.
 Upload a PDF CV with clear skills and experience sections.
 Contact RakFort for deployment or styling requirements.
+
+
+<img width="1919" height="938" alt="image" src="https://github.com/user-attachments/assets/42512c56-1201-4f5e-a083-f2b9e17d75c2" />
+

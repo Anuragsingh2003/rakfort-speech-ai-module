@@ -14,11 +14,11 @@ speech_client = speech.SpeechClient()
 genai.configure(api_key="get_from_env")  # Replace with your Gemini API key
 gemini_model = genai.GenerativeModel("gemini-1.5-flash")
 
-JD_TEXT = """
-Job Title: Software Engineer
-Responsibilities: Develop and maintain software solutions, collaborate with cross-functional teams, ensure high-quality code.
-Requirements: Proficiency in Python, React.js, cloud technologies; strong communication skills; AI/ML experience is a plus.
-"""
+# JD_TEXT = """
+# Job Title: Software Engineer
+# Responsibilities: Develop and maintain software solutions, collaborate with cross-functional teams, ensure high-quality code.
+# Requirements: Proficiency in Python, React.js, cloud technologies; strong communication skills; AI/ML experience is a plus.
+# """
 
 # Mock interview count (can be replaced with database)
 interview_count = 0
@@ -26,12 +26,14 @@ interview_count = 0
 # Mock CV data
 cv_data = {"skills": [], "experience": ""}
 
-def evaluate_answer(candidate_name, position, question, answer):
+    # **Applying for Position:** {position}
+    # **Job Description:** {JD_TEXT}
+
+
+def evaluate_answer(candidate_name, question, answer):
     prompt = f"""
     You are an expert hiring manager providing constructive feedback for a candidate's interview answer to help them improve.
     **Candidate Name:** {candidate_name}
-    **Applying for Position:** {position}
-    **Job Description:** {JD_TEXT}
     **Question:** {question}
     **Answer:** {answer}
     **Task:** Provide a detailed evaluation with:
@@ -88,7 +90,8 @@ def evaluate_audio():
         speech_contexts=[{
             "phrases": ["Python", "React", "software engineer", "cloud technologies", "AI", "ML"],
             "boost": 10.0
-        }]
+        }] #Improves recognition of listed phrases by giving them priority. recogin fast or easy
+        
     )
     try:
         response = speech_client.recognize(config=config, audio=recognition_audio)
@@ -101,7 +104,7 @@ def evaluate_audio():
         print(f"Speech-to-Text error: {e}")
         return jsonify({"error": "Failed to transcribe audio"}), 500
 
-    feedback = evaluate_answer("User", "Software Engineer", question, transcript)
+    feedback = evaluate_answer("User", question, transcript)
     interview_count += 1
 
     return jsonify({
